@@ -1,0 +1,21 @@
+site_name: FGCZ Python Project Reference
+site_description: Minimal reference for typed, tested, and documented FGCZ Python packages.
+docs_dir: docs
+site_dir: public
+exclude_docs: |
+  AGENTS.md
+  CLAUDE.md
+  GEMINI.md
+
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - Getting started: getting-started.md
+  - Development: development.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences

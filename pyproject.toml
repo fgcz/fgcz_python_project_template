@@ -1,0 +1,67 @@
+[project]
+name = "fgcz-python-project-reference"
+version = "0.1.0"
+description = "Minimal reference project for typed, tested, and documented FGCZ Python packages."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+authors = [
+    { name = "Functional Genomics Center Zurich" },
+]
+dependencies = []
+
+[project.scripts]
+fgcz-reference = "fgcz_reference_project.cli:main"
+
+[build-system]
+requires = ["hatchling>=1.28,<2"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "deptry>=0.25.1,<0.26",
+    "diff-cover>=10.4,<11",
+    "pip-audit>=2.10,<3",
+    "pre-commit>=4.5,<5",
+    "pyright>=1.1.408,<2",
+    "pytest>=9,<10",
+    "pytest-cov>=7,<8",
+    "ruff==0.15.11",
+]
+docs = [
+    "mkdocs-material>=9.7,<10",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/fgcz_reference_project"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-config --strict-markers"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["A", "B", "C4", "E", "F", "I", "UP", "W"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pyright]
+pythonVersion = "3.12"
+include = ["src", "tests", "scripts"]
+typeCheckingMode = "strict"
+
+[tool.coverage.run]
+branch = true
+relative_files = true
+source = ["fgcz_reference_project"]
+
+[tool.coverage.report]
+fail_under = 100
+show_missing = true
+
+[tool.deptry]
+known_first_party = ["fgcz_reference_project"]

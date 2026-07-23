@@ -1,0 +1,12 @@
+.DS_Store
+.agents/
+.coverage
+.pytest_cache/
+.ruff_cache/
+.venv/
+__pycache__/
+*.py[cod]
+coverage.xml
+dist/
+htmlcov/
+public/
