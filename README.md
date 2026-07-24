@@ -15,7 +15,7 @@ structure and quality gates.
 
 | Area | Included |
 |---|---|
-| Packaging | `src/` layout, `pyproject.toml`, hatchling, uv lockfile, typed-package marker, console entry point |
+| Packaging | `src/` layout, `pyproject.toml`, uv build backend, uv lockfile, typed-package marker, console entry point |
 | Example | One typed library function and a small `argparse` CLI |
 | Tests | Unit and CLI error-path tests with 100% line and branch coverage |
 | Documentation | MkDocs Material site built with `--strict` and deployable to GitHub Pages |

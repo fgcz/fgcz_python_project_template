@@ -21,5 +21,6 @@ def project_slug(name: str) -> str:
     """
     slug = _NON_ALPHANUMERIC.sub("-", name.strip().lower()).strip("-")
     if not slug:
-        raise ValueError("Project name must contain at least one letter or digit.")
+        message = "Project name must contain at least one letter or digit."
+        raise ValueError(message)
     return slug
