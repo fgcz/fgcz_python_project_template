@@ -14,8 +14,8 @@ dependencies = []
 fgcz-reference = "fgcz_reference_project.cli:main"
 
 [build-system]
-requires = ["hatchling>=1.28,<2"]
-build-backend = "hatchling.build"
+requires = ["uv_build>=0.11.7,<0.12"]
+build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
@@ -26,14 +26,14 @@ dev = [
     "pyright>=1.1.408,<2",
     "pytest>=9,<10",
     "pytest-cov>=7,<8",
-    "ruff==0.15.11",
+    "ruff==0.16.0",
 ]
 docs = [
     "mkdocs-material>=9.7,<10",
 ]
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/fgcz_reference_project"]
+[tool.uv.build-backend]
+module-name = "fgcz_reference_project"
 
 [tool.pytest.ini_options]
 addopts = "-ra --strict-config --strict-markers"
@@ -45,26 +45,44 @@ target-version = "py312"
 
 [tool.ruff.lint]
 select = [
-    "A",
-    "B",
-    "C4",
-    "C901",
-    "E",
-    "F",
-    "I",
-    "PLR0911",
-    "PLR0912",
-    "PLR0913",
-    "PLR0915",
-    "UP",
-    "W",
+    "F",   # pyflakes
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "I",   # isort
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "A",   # flake8-builtins
+    "C4",  # flake8-comprehensions
+    "RUF", # ruff-specific
+    "C90", # mccabe complexity
+    "PL",  # pylint (convention/error/warning/refactor)
+    "SIM", # flake8-simplify
+    "RET", # flake8-return
+    "PTH", # flake8-use-pathlib
+    "PT",  # flake8-pytest-style
+    "TID", # flake8-tidy-imports
+    "TC",  # flake8-type-checking
+    "ARG", # flake8-unused-arguments
+    "EM",  # flake8-errmsg
+    "D",   # pydocstyle
+    "ANN", # flake8-annotations
+    "S",   # flake8-bandit (security)
 ]
+ignore = ["ANN401"]
 
 [tool.ruff.lint.mccabe]
 max-complexity = 10
 
 [tool.ruff.lint.pylint]
 max-args = 7
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "D", "ANN", "PLR2004", "ARG"]
+"scripts/**" = ["S603", "S607", "D", "PLR2004", "EM"]
 
 [tool.ruff.format]
 quote-style = "double"

@@ -41,3 +41,44 @@ jobs:
 
       - name: Run pre-push checks
         run: uv run --no-sync pre-commit run --hook-stage pre-push --all-files
+
+  tests-matrix:
+    name: tests (py${{ matrix.python }}, ${{ matrix.resolution }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        # Exercise the supported range at both ends: minimum Python with the
+        # oldest direct dependencies, and maximum Python with the newest. This
+        # leg is deliberately non-frozen (it re-resolves per matrix entry), so
+        # it cannot reuse the --frozen pytest-coverage hook. Bump "3.14" when a
+        # newer interpreter enters the supported range.
+        include:
+          - python: "3.12"
+            resolution: "lowest-direct"
+          - python: "3.14"
+            resolution: "highest"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.2.0
+        with:
+          enable-cache: true
+
+      - name: Install Python
+        run: uv python install ${{ matrix.python }}
+
+      - name: Sync environment (${{ matrix.resolution }})
+        run: uv sync --python ${{ matrix.python }} --resolution ${{ matrix.resolution }}
+
+      - name: Run tests with branch coverage
+        # The 100% threshold comes from [tool.coverage.report] in pyproject.toml,
+        # the same source the pytest-coverage hook uses -- not a duplicated flag.
+        run: >-
+          uv run --no-sync python -m pytest
+          --cov=fgcz_reference_project
+          --cov-branch
+          --cov-report=term-missing
