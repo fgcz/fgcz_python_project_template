@@ -30,7 +30,7 @@ to run from the member's own directory.
 
 ```yaml
 repos:
-  - repo: https://github.com/fgcz/fgcz_python_project_templete
+  - repo: https://github.com/fgcz/fgcz_python_project_template
     rev: v0.2.0
     hooks:
       - id: check-tests-structure
@@ -54,7 +54,7 @@ repos:
         pass_filenames: false
         always_run: true
         additional_dependencies:
-          - "fgcz-check-tests-structure @ git+https://github.com/fgcz/fgcz_python_project_templete@v0.2.0#subdirectory=.ci/check-tests-structure"
+          - "fgcz-check-tests-structure @ git+https://github.com/fgcz/fgcz_python_project_template@v0.2.0#subdirectory=.ci/check-tests-structure"
 ```
 
 The same requirement specifier works outside pre-commit, for example in a nox
@@ -65,7 +65,7 @@ session:
 def tests_structure(session) -> None:
     """Performs a check on the test structure."""
     session.install(
-        "git+https://github.com/fgcz/fgcz_python_project_templete"
+        "git+https://github.com/fgcz/fgcz_python_project_template"
         "@v0.2.0#subdirectory=.ci/check-tests-structure"
     )
     session.run("check-tests-structure")
