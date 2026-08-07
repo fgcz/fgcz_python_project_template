@@ -23,6 +23,7 @@ Install the locked documentation group from the repository root:
 | File | Purpose |
 |---|---|
 | `index.md` | Project overview and library example |
+| `check-tests-structure.md` | Shared hook: configuration and consumer snippets |
 | `getting-started.md` | Installation and first command |
 | `development.md` | Local and CI quality workflow |
 

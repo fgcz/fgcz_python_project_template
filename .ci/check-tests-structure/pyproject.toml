@@ -1,0 +1,38 @@
+[project]
+name = "fgcz-check-tests-structure"
+version = "0.1.0"
+description = "Checks if your test folder structure corresponds to the source folder structure"
+authors = [{ name = "Leonardo Schwarz", email = "leonardo.schwarz@fgcz.ethz.ch" }]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+
+dependencies = [
+    "cyclopts>=2.9",
+    "pydantic>=2.9",
+    "rapidfuzz>=3.10",
+]
+
+[project.scripts]
+check-tests-structure = "check_tests_structure.__main__:app"
+
+[dependency-groups]
+dev = [
+    "pyfakefs>=5.7",
+    "pytest>=8",
+    "pytest-mock>=3.14",
+]
+
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.check-tests-structure]
+sources_path = "src/check_tests_structure"
+tests_path = "tests"

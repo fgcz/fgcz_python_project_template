@@ -35,6 +35,26 @@ repos:
         pass_filenames: false
         stages: [pre-commit]
 
+      - id: check-tests-structure
+        name: tests mirror sources
+        # Runs the vendored hook from .ci/ against this repository. --project keeps the
+        # working directory here, so the tool reads the root pyproject.toml.
+        entry: uv run --project .ci/check-tests-structure --frozen check-tests-structure
+        language: system
+        always_run: true
+        pass_filenames: false
+        stages: [pre-commit]
+
+      - id: check-tests-structure-tests
+        name: vendored hook tests
+        # --directory does change the working directory, keeping this suite separate
+        # from the reference project's own tests.
+        entry: uv run --directory .ci/check-tests-structure --frozen pytest
+        language: system
+        always_run: true
+        pass_filenames: false
+        stages: [pre-push]
+
       - id: pytest-coverage
         name: tests and branch coverage
         entry: >-

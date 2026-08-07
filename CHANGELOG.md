@@ -6,6 +6,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- The `check-tests-structure` hook, consolidated from
+  `leoschwarz/check-tests-structure` into `.ci/check-tests-structure/` and
+  published from this repository through `.pre-commit-hooks.yaml`, so that FGCZ
+  projects no longer depend on a personal account. It runs on this repository in
+  the `pre-commit` stage, and its own test suite runs in the `pre-push` stage.
+
 - CI matrix that runs the tests across the supported Python range and
   dependency-resolution bounds (`lowest-direct` on the minimum interpreter,
   `highest` on the maximum).

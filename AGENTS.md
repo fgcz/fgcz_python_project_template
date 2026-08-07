@@ -26,6 +26,8 @@ instructions override repository files.
 | `scripts/` | Changed-line coverage and wheel inspection |
 | `docs/` | MkDocs source; see `docs/AGENTS.md` |
 | `.github/workflows/` | CI, Pages, and scheduled audit; see its `AGENTS.md` |
+| `.ci/check-tests-structure/` | Vendored `check-tests-structure` hook; self-contained subproject |
+| `.pre-commit-hooks.yaml` | Hook manifest other repositories consume |
 
 ## Golden samples
 
@@ -44,6 +46,14 @@ instructions override repository files.
 - Pyright strict mode and 100% line/branch coverage are blocking.
 - Add domain-specific checks as hooks, then invoke the same hooks from CI.
 - Record user-visible changes under `Unreleased` in `CHANGELOG.md`.
+- `.ci/check-tests-structure/` is vendored, MIT-licensed, and keeps its own
+  `pyproject.toml` and `uv.lock`; it is not a uv workspace member and not part of
+  the reference distribution. Root Ruff lints it, but Pyright, coverage, and
+  deptry deliberately exclude it. Run its suite with
+  `uv run --directory .ci/check-tests-structure --frozen pytest`.
+- Changing `.pre-commit-hooks.yaml` changes a public interface for other
+  repositories; the `additional_dependencies` relative path there is what makes
+  the subdirectory installable through pre-commit.
 
 ## Boundaries
 

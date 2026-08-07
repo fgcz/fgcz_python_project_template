@@ -5,6 +5,10 @@ the Functional Genomics Center Zurich. Its purpose is to demonstrate a complete
 package layout and an aligned local/remote quality workflow, not to provide
 domain functionality that other projects should depend on.
 
+It additionally hosts one shared quality hook that other FGCZ repositories do
+consume: [`check-tests-structure`](docs/check-tests-structure.md). The hook lives
+in `.ci/check-tests-structure/`, separate from the reference package.
+
 The example slug library and CLI are intentionally minimal. They make the
 package build, public interface, success path, error path, tests, coverage,
 documentation, and console entry point concrete enough to validate. When
@@ -21,6 +25,7 @@ structure and quality gates.
 | Documentation | MkDocs Material site built with `--strict` and deployable to GitHub Pages |
 | Agent guidance | Verified root and scoped `AGENTS.md` files with Claude/Gemini symlinks |
 | Automation | Pre-commit, pre-push, pull-request CI, Pages deployment, and a weekly security audit |
+| Shared tooling | The `check-tests-structure` pre-commit hook, vendored in `.ci/` and offered to other repositories |
 
 ## Quality gates
 
@@ -29,8 +34,8 @@ a local hook does not bypass the merge gate.
 
 | Stage | Checks |
 |---|---|
-| `pre-commit` | Ruff lint and format, including complexity/design rules; strict Pyright; deptry |
-| `pre-push` | pytest with 100% branch coverage; 100% changed-line coverage; sdist/wheel inspection; strict MkDocs |
+| `pre-commit` | Ruff lint and format, including complexity/design rules; strict Pyright; deptry; the tests-mirror-sources hook |
+| `pre-push` | pytest with 100% branch coverage; 100% changed-line coverage; sdist/wheel inspection; strict MkDocs; the vendored hook's own tests |
 | Manual and weekly CI | pip-audit against the frozen installed environment |
 
 The hook definitions live in `.pre-commit-config.yaml`; CI calls the complete

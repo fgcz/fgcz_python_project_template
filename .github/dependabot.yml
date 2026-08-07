@@ -8,6 +8,14 @@ updates:
       dependencies:
         patterns:
           - "*"
+  - package-ecosystem: "uv"
+    directory: "/.ci/check-tests-structure"
+    schedule:
+      interval: "weekly"
+    groups:
+      dependencies:
+        patterns:
+          - "*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:

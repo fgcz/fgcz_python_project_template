@@ -8,7 +8,8 @@ The local hooks are the source for the GitHub Actions quality commands.
 uv run pre-commit run --hook-stage pre-commit --all-files
 ```
 
-This runs Ruff, strict Pyright, and deptry.
+This runs Ruff, strict Pyright, deptry, and the
+[tests-mirror-sources hook](check-tests-structure.md).
 
 ## Every push
 
@@ -17,7 +18,7 @@ uv run pre-commit run --hook-stage pre-push --all-files
 ```
 
 This runs tests with branch coverage, changed-line coverage, package inspection,
-and a strict documentation build.
+a strict documentation build, and the vendored hook's own test suite.
 
 ## Dependency audit
 
