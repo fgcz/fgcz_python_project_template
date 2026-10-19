@@ -83,6 +83,9 @@ convention = "google"
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["S101", "D", "ANN", "PLR2004", "ARG"]
 "scripts/**" = ["S603", "S607", "D", "PLR2004", "EM"]
+# Vendored third-party hook: linted and formatted, but not held to this project's
+# docstring, annotation, and typing rules. See .ci/check-tests-structure/README.md.
+".ci/**" = ["S101", "D", "ANN", "EM", "PLR2004", "ARG", "TC"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -103,3 +106,10 @@ show_missing = true
 
 [tool.deptry]
 known_first_party = ["fgcz_reference_project"]
+# The vendored hook in .ci/ is a separate distribution with its own dependencies;
+# deptry would otherwise report them against this zero-dependency project.
+extend_exclude = ["\\.ci"]
+
+[tool.check-tests-structure]
+sources_path = "src/fgcz_reference_project"
+tests_path = "tests"

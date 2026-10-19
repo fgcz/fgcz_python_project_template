@@ -1,0 +1,12 @@
+# Hook manifest consumed by other repositories. The tool itself lives in
+# .ci/check-tests-structure/; pre-commit installs `additional_dependencies`
+# with the cloned hook repository as the working directory, which is what makes
+# the relative path below resolve to that subproject.
+- id: check-tests-structure
+  name: check tests structure
+  description: Verify that the tests tree mirrors the sources tree.
+  language: python
+  entry: check-tests-structure
+  additional_dependencies: ["./.ci/check-tests-structure"]
+  pass_filenames: false
+  types: [python]
