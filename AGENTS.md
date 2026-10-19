@@ -44,6 +44,8 @@ instructions override repository files.
 - Keep `src/fgcz_reference_project/__init__.py` empty; import from concrete
   modules.
 - Pyright strict mode and 100% line/branch coverage are blocking.
+- CLIs use `cyclopts`; logging uses `loguru`. Library modules only emit log
+  records; the CLI entry point configures sinks and levels.
 - Add domain-specific checks as hooks, then invoke the same hooks from CI.
 - Record user-visible changes under `Unreleased` in `CHANGELOG.md`.
 - `.ci/check-tests-structure/` is vendored, MIT-licensed, and keeps its own
