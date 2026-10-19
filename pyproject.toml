@@ -8,7 +8,10 @@ license = "Apache-2.0"
 authors = [
     { name = "Functional Genomics Center Zurich" },
 ]
-dependencies = []
+dependencies = [
+    "cyclopts>=5.2,<6",
+    "loguru>=0.7.3,<0.8",
+]
 
 [project.scripts]
 fgcz-reference = "fgcz_reference_project.cli:main"
@@ -107,7 +110,7 @@ show_missing = true
 [tool.deptry]
 known_first_party = ["fgcz_reference_project"]
 # The vendored hook in .ci/ is a separate distribution with its own dependencies;
-# deptry would otherwise report them against this zero-dependency project.
+# deptry would otherwise report them against this project.
 extend_exclude = ["\\.ci"]
 
 [tool.check-tests-structure]

@@ -20,6 +20,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- The example CLI uses `cyclopts` and logs with `loguru` (configured in the CLI,
+  emitted by the library), replacing `argparse`; `--verbose` shows debug logs.
 - Documented the reference project's intent and complete quality-gate stack.
 - Enabled blocking Ruff complexity and function-design checks.
 - Switched the build backend from hatchling to `uv_build`.

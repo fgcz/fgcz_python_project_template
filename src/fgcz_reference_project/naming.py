@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import re
 
+from loguru import logger
+
 _NON_ALPHANUMERIC = re.compile(r"[^a-z0-9]+")
 
 
@@ -23,4 +25,5 @@ def project_slug(name: str) -> str:
     if not slug:
         message = "Project name must contain at least one letter or digit."
         raise ValueError(message)
+    logger.debug("Slug for {!r}: {!r}", name, slug)
     return slug

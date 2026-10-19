@@ -20,7 +20,7 @@ structure and quality gates.
 | Area | Included |
 |---|---|
 | Packaging | `src/` layout, `pyproject.toml`, uv build backend, uv lockfile, typed-package marker, console entry point |
-| Example | One typed library function and a small `argparse` CLI |
+| Example | One typed library function and a small `cyclopts` CLI with `loguru` logging |
 | Tests | Unit and CLI error-path tests with 100% line and branch coverage |
 | Documentation | MkDocs Material site built with `--strict` and deployable to GitHub Pages |
 | Agent guidance | Verified root and scoped `AGENTS.md` files with Claude/Gemini symlinks |
